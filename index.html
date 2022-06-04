@@ -33,13 +33,13 @@
                     </div>
                     <div> 
                         <label htmlfor="hours">Hours</label>
-                        <input value={inverted ? amount : Math.round(amount/60)} id="hours" placeholder="Hours" type="number"
+                        <input value={inverted ? amount : (amount/60).toFixed(1)} id="hours" placeholder="Hours" type="number"
                         onChange={onChange}
                         disabled={!inverted}
                         />
                     </div>
                     <button onClick={reset}>Reset</button>
-                    <button onClick={onFlip}>{inverted ? "Turn back":"Invert"}</button>
+                    <button onClick={onFlip}>{inverted ? "Minutes":"Hour"}</button>
                     
                 </div>
             );
