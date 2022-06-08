@@ -6,10 +6,11 @@
     
     <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
     <!-- Your custom script here -->
     <script type="text/babel">
-        function Btn({text, changeValue}){
+        function Btn({text, changeValue, fontSize}){
             return <button 
             onClick={changeValue}
             style={{
@@ -17,18 +18,22 @@
                 color:"white",
                 padding:"10px 20px",
                 borderRadius:10,
-                border:0
+                border:0,
+                fontSize:{fontSize}
+                
         }}>{text}</button>;
         }
-
-        const MemorizeBtn = React.memo(Btn)
+        Btn.PropTypes =  {
+            text: PropTypes.string,
+            fontSize:PropTypes.number
+        }
         function App (){
             const [value, setValue] = React.useState("Save Changes")
             const changeValue = () => setValue("Revert Changes")
             return(
                 <div>
-                   <MemorizeBtn text={value} changeValue={changeValue}/>
-                   <MemorizeBtn text="Continue" />
+                   <Btn text={value} changeValue={changeValue} fontSize={18}/>
+                   <Btn text="Continue" />
                 </div>
             );
         }
