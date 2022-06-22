@@ -20,6 +20,8 @@ function App() {
           <input onChange={onChange} value={toDo} type="text" placeholder="write your to do..."/>
           <button>Add To Do</button>
         </form>
+      <hr/>
+      {toDos.map((item) => item.toUpperCase())}
     </div>
   );
 }
