@@ -8,7 +8,7 @@ function CoinTracker(){
             .then((response)=>response.json())
             .then((json)=> setCoins(json));
             setLoading(false);
-    },[])
+    },[]) 
     return (
         <div>
             <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
