@@ -1,6 +1,6 @@
-import { useState,useEffect } from "react";
+import PropTypes from "prop-types"
 
-function Movie(){
+function Movie({coverImg,title,summary,genres}){
     const [loading, setLoading] = useState(true);
     const [movies , setMovies] = useState([]);
     const getMoives = async() => {
@@ -12,30 +12,26 @@ function Movie(){
                 
         setMovies(json.data.movies);
         setLoading(false);
-    };
-
-    useEffect(()=>{
-        getMoives()
-    },[]);
-
-{/* main */}
     return (
-        <div>
-            {loading ? (<h1>Loading...</h1>) 
-                : 
-            (<div>
-                {movies.map(movie => 
-                <div key={movie.id}>
-                    
-                    <img src={movie.medium_cover_image}></img>
-                    <h2>{movie.title}</h2>
-                    <p>{movie.summary}</p>
-                    <ul>
-                        {movie.genres.map(g => <li key={g}>{g}</li>)}
-                    </ul>
-                </div>)}
-            </div>)}       
-        </div>
-    )}
+    <div>                
+        <img src={coverImg} alt={title}></img>
+        <h2>{title}</h2>
+        <p>{summary}</p>
+        <ul>
+            {genres.map((g) => ( 
+            <li key={g}>{g}</li>
+            ))}
+        </ul>
+    </div>
+    );
+    }
+}
+
+Movie.PropTypes = {
+    coverImg: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 export default Movie;
